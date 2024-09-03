@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_xs">8dp</dimen>
+    <dimen name="padding_s">12dp</dimen>
+    <dimen name="padding_m">16dp</dimen>
+    <dimen name="padding_l">24dp</dimen>
+    <dimen name="padding_xl">28dp</dimen>
+
+    <dimen name="corner_radius_m">16dp</dimen>
+
+    <dimen name="text_size_m">16sp</dimen>
+    <dimen name="text_size_l">22sp</dimen>
+</resources>
