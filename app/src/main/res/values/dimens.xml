@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding_xs">8dp</dimen>
-    <dimen name="padding_s">12dp</dimen>
-    <dimen name="padding_m">16dp</dimen>
-    <dimen name="padding_l">24dp</dimen>
-    <dimen name="padding_xl">28dp</dimen>
+    <dimen name="margin_xxs">6dp</dimen>
+    <dimen name="margin_xs">8dp</dimen>
+    <dimen name="margin_s">12dp</dimen>
+    <dimen name="margin_m">16dp</dimen>
+    <dimen name="margin_l">24dp</dimen>
+    <dimen name="margin_xl">28dp</dimen>
 
     <dimen name="corner_radius_m">16dp</dimen>
 

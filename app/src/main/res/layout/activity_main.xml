@@ -27,8 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="@dimen/padding_l"
-        android:layout_marginHorizontal="@dimen/padding_m"
+        android:layout_marginTop="@dimen/margin_l"
+        android:layout_marginHorizontal="@dimen/margin_m"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:backgroundTint="@color/background_secondary"
@@ -38,7 +38,7 @@
         android:textSize="@dimen/text_size_l"
         app:icon="@drawable/ic_search"
         app:iconGravity="textStart"
-        app:iconPadding="@dimen/padding_xs"
+        app:iconPadding="@dimen/margin_xs"
         app:iconTint="@color/ic_primary"
         app:cornerRadius="@dimen/corner_radius_m"/>
 
@@ -46,8 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="@dimen/padding_m"
-        android:layout_marginHorizontal="@dimen/padding_m"
+        android:layout_marginTop="@dimen/margin_m"
+        android:layout_marginHorizontal="@dimen/margin_m"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:backgroundTint="@color/background_secondary"
@@ -57,7 +57,7 @@
         android:textSize="@dimen/text_size_l"
         app:icon="@drawable/ic_search"
         app:iconGravity="textStart"
-        app:iconPadding="@dimen/padding_xs"
+        app:iconPadding="@dimen/margin_xs"
         app:iconTint="@color/ic_primary"
         app:cornerRadius="@dimen/corner_radius_m"/>
 
@@ -65,9 +65,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="@dimen/padding_m"
-        android:layout_marginBottom="@dimen/padding_xl"
-        android:layout_marginHorizontal="@dimen/padding_m"
+        android:layout_marginTop="@dimen/margin_m"
+        android:layout_marginBottom="@dimen/margin_xl"
+        android:layout_marginHorizontal="@dimen/margin_m"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:backgroundTint="@color/background_secondary"
@@ -77,7 +77,7 @@
         android:textSize="@dimen/text_size_l"
         app:icon="@drawable/ic_search"
         app:iconGravity="textStart"
-        app:iconPadding="@dimen/padding_xs"
+        app:iconPadding="@dimen/margin_xs"
         app:iconTint="@color/ic_primary"
         app:cornerRadius="@dimen/corner_radius_m"/>
 
