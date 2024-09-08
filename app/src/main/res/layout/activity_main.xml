@@ -24,6 +24,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <Button
+        android:id="@+id/search_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -43,6 +44,7 @@
         app:cornerRadius="@dimen/corner_radius_m"/>
 
     <Button
+        android:id="@+id/media_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -55,13 +57,14 @@
         android:textColor="@color/text_primary"
         android:textAllCaps="false"
         android:textSize="@dimen/text_size_l"
-        app:icon="@drawable/ic_search"
+        app:icon="@drawable/ic_media_library"
         app:iconGravity="textStart"
         app:iconPadding="@dimen/margin_xs"
         app:iconTint="@color/ic_primary"
         app:cornerRadius="@dimen/corner_radius_m"/>
 
     <Button
+        android:id="@+id/settings_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -75,7 +78,7 @@
         android:textColor="@color/text_primary"
         android:textAllCaps="false"
         android:textSize="@dimen/text_size_l"
-        app:icon="@drawable/ic_search"
+        app:icon="@drawable/ic_settings"
         app:iconGravity="textStart"
         app:iconPadding="@dimen/margin_xs"
         app:iconTint="@color/ic_primary"
