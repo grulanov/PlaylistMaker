@@ -22,12 +22,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val searchButton = findViewById<Button>(R.id.search_button)
-        searchButton.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(p0: View?) {
-                val intent = Intent(this@MainActivity, SearchActivity::class.java)
-                startActivity(intent)
-            }
-        })
+        searchButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, SearchActivity::class.java)
+            startActivity(intent)
+        }
 
         val mediaButton = findViewById<Button>(R.id.media_button)
         mediaButton.setOnClickListener {
