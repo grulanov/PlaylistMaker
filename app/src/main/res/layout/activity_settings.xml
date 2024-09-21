@@ -19,14 +19,14 @@
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_back"
             android:background="?attr/selectableItemBackground"
-            app:tint="@color/ic_primary" />
+            app:tint="@color/ic_on_content_accent" />
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/settings_title"
-            android:textColor="@color/title"
+            android:textColor="@color/screen_title"
             android:textSize="@dimen/text_size_l" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -44,7 +44,7 @@
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
             android:text="@string/settings_dark_theme_item"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/text_size_m" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -52,7 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/margin_s"
-            android:layout_marginEnd="@dimen/margin_xxs"/>
+            android:layout_marginEnd="@dimen/margin_xxs"
+            app:thumbTint="@color/switch_thumb"
+            app:trackTint="@color/switch_track"/>
 
     </LinearLayout>
 
@@ -70,7 +72,7 @@
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
             android:text="@string/settings_share_item"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/text_size_m"/>
         
         <ImageView
@@ -78,7 +80,7 @@
             android:layout_height="24dp"
             android:layout_marginHorizontal="@dimen/margin_s"
             android:src="@drawable/ic_share"
-            app:tint="@color/ic_secondary" />
+            app:tint="@color/ic_primary" />
 
     </LinearLayout>
 
@@ -96,7 +98,7 @@
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
             android:text="@string/settings_support_item"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/text_size_m"/>
 
         <ImageView
@@ -104,7 +106,7 @@
             android:layout_height="24dp"
             android:layout_marginHorizontal="@dimen/margin_s"
             android:src="@drawable/ic_support"
-            app:tint="@color/ic_secondary" />
+            app:tint="@color/ic_primary" />
 
     </LinearLayout>
 
@@ -122,7 +124,7 @@
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
             android:text="@string/settings_support_item"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_primary"
             android:textSize="@dimen/text_size_m"/>
 
         <ImageView
@@ -130,7 +132,7 @@
             android:layout_height="24dp"
             android:layout_marginHorizontal="@dimen/margin_s"
             android:src="@drawable/ic_arrow_forward"
-            app:tint="@color/ic_secondary" />
+            app:tint="@color/ic_primary" />
 
     </LinearLayout>
 
