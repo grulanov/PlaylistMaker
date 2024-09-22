@@ -7,6 +7,7 @@
     <style name="Widget.PlaylistMaker.View"/>
     <style name="Widget.PlaylistMaker.Button"/>
     <style name="Widget.PlaylistMaker.TextView"/>
+    <style name="Widget.PlaylistMaker.EditText"/>
     <style name="Widget.PlaylistMaker.ImageView"/>
 
     <!-- View -->
@@ -23,14 +24,15 @@
     <!-- Button -->
 
     <style name="Widget.PlaylistMaker.Button.Back">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:src">@drawable/ic_back</item>
         <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-    
-    <style name="Widget.PlaylistMaker.Button.Back.DayNight" parent="Widget.PlaylistMaker.Button.Back">
         <item name="tint">@color/yp_black</item>
     </style>
     
+    <style name="Widget.PlaylistMaker.Button.Back.DayNight" parent="Widget.PlaylistMaker.Button.Back"/>
+
     <style name="Widget.PlaylistMaker.Button.Main" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -50,10 +52,28 @@
         <item name="android:textAppearance">@style/TextAppearance.PlaylistMaker.Regular16</item>
     </style>
 
+    <!-- EditText -->
+
+    <style name="Widget.PlaylistMaker.EditText.SearchBar">
+        <item name="android:importantForAutofill">no</item>
+        <item name="android:inputType">text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:textAppearance">@style/TextAppearance.PlaylistMaker.Regular16</item>
+        <item name="android:textColor">@color/yp_black</item>
+        <item name="android:textColorHint">@color/yp_text_gray</item>
+    </style>
+    <style name="Widget.PlaylistMaker.EditText.SearchBar.DayNight"/>
+
     <!-- ImageView -->
 
-    <style name="Widget.PlaylistMaker.ImageView.List"/>
-    <style name="Widget.PlaylistMaker.ImageView.List.DayNight">
+    <style name="Widget.PlaylistMaker.ImageView.List">
         <item name="tint">@color/yp_text_gray</item>
     </style>
+    <style name="Widget.PlaylistMaker.ImageView.List.DayNight"/>
+
+    <style name="Widget.PlaylistMaker.ImageView.SearchBar">
+        <item name="tint">@color/yp_text_gray</item>
+    </style>
+    <style name="Widget.PlaylistMaker.ImageView.SearchBar.DayNight"/>
 </resources>

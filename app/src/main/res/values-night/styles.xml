@@ -12,9 +12,19 @@
         <item name="tint">@color/yp_white</item>
     </style>
 
+    <!-- EditText -->
+
+    <style name="Widget.PlaylistMaker.EditText.SearchBar.DayNight">
+        <item name="android:textColorHint">@color/yp_black</item>
+    </style>
+
     <!-- ImageView -->
 
     <style name="Widget.PlaylistMaker.ImageView.List.DayNight">
         <item name="tint">@color/yp_white</item>
+    </style>
+
+    <style name="Widget.PlaylistMaker.ImageView.SearchBar.DayNight">
+        <item name="tint">@color/yp_black</item>
     </style>
 </resources>
