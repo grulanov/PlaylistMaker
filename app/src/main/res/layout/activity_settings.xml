@@ -17,9 +17,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_back"
-            android:background="?attr/selectableItemBackground"
-            app:tint="@color/ic_on_content_accent" />
+            style="@style/Widget.PlaylistMaker.Button.Back.DayNight"/>
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -27,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_title"
             android:textColor="@color/screen_title"
-            android:textSize="@dimen/text_size_l" />
+            android:textAppearance="@style/TextAppearance.PlaylistMaker.Medium22" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -43,18 +41,15 @@
             android:layout_weight="1"
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
-            android:text="@string/settings_dark_theme_item"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_size_m" />
+            style="@style/Widget.PlaylistMaker.TextView.List"
+            android:text="@string/settings_dark_theme_item"/>
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/margin_s"
-            android:layout_marginEnd="@dimen/margin_xxs"
-            app:thumbTint="@color/switch_thumb"
-            app:trackTint="@color/switch_track"/>
+            android:layout_marginEnd="@dimen/margin_xxs"/>
 
     </LinearLayout>
 
@@ -71,16 +66,15 @@
             android:layout_weight="1"
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
-            android:text="@string/settings_share_item"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_size_m"/>
+            style="@style/Widget.PlaylistMaker.TextView.List"
+            android:text="@string/settings_share_item"/>
         
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginHorizontal="@dimen/margin_s"
-            android:src="@drawable/ic_share"
-            app:tint="@color/ic_primary" />
+            style="@style/Widget.PlaylistMaker.ImageView.List.DayNight"
+            android:src="@drawable/ic_share"/>
 
     </LinearLayout>
 
@@ -97,16 +91,15 @@
             android:layout_weight="1"
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
-            android:text="@string/settings_support_item"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_size_m"/>
+            style="@style/Widget.PlaylistMaker.TextView.List"
+            android:text="@string/settings_support_item"/>
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginHorizontal="@dimen/margin_s"
-            android:src="@drawable/ic_support"
-            app:tint="@color/ic_primary" />
+            style="@style/Widget.PlaylistMaker.ImageView.List.DayNight"
+            android:src="@drawable/ic_support"/>
 
     </LinearLayout>
 
@@ -123,16 +116,15 @@
             android:layout_weight="1"
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
-            android:text="@string/settings_support_item"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_size_m"/>
+            style="@style/Widget.PlaylistMaker.TextView.List"
+            android:text="@string/settings_support_item"/>
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginHorizontal="@dimen/margin_s"
-            android:src="@drawable/ic_arrow_forward"
-            app:tint="@color/ic_primary" />
+            style="@style/Widget.PlaylistMaker.ImageView.List.DayNight"
+            android:src="@drawable/ic_arrow_forward"/>
 
     </LinearLayout>
 

@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_accent">#1A1B22</color>
-    <color name="background_primary">#1A1B22</color>
+    <color name="background_primary">@color/yp_black</color>
 
-    <color name="content_on_background_accent">#FFFFFF</color>
+    <color name="screen_title">@color/yp_white</color>
 
-    <color name="screen_title_on_background_accent">#FFFFFF</color>
-    <color name="screen_title">#FFFFFF</color>
-
-    <color name="text_on_content_accent">#1A1B22</color>
-    <color name="text_primary">#FFFFFF</color>
-
-    <color name="ic_on_content_accent">#1A1B22</color>
-    <color name="ic_primary">#FFFFFF</color>
-
-    <color name="switch_thumb">#3772E7</color>
-    <color name="switch_track">#7A9FBBF3</color>
+    <color name="text_primary">@color/yp_white</color>
+    <color name="text_secondary">@color/yp_white</color>
 </resources>

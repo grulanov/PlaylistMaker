@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ViewGroup -->
+
+    <style name="Widget.PlaylistMaker.ViewGroup.Main.DayNight">
+        <item name="android:background">@color/yp_black</item>
+    </style>
+
+    <!-- Button -->
+
+    <style name="Widget.PlaylistMaker.Button.Back.DayNight" parent="Widget.PlaylistMaker.Button.Back">
+        <item name="tint">@color/yp_white</item>
+    </style>
+
+    <!-- ImageView -->
+
+    <style name="Widget.PlaylistMaker.ImageView.List.DayNight">
+        <item name="tint">@color/yp_white</item>
+    </style>
+</resources>

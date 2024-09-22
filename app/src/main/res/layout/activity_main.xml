@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_accent"
+    style="@style/Widget.PlaylistMaker.ViewGroup.Main.DayNight"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -18,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textColor="@color/screen_title_on_background_accent"
-            android:textSize="@dimen/text_size_l" />
+            android:textColor="@color/yp_white"
+            android:textAppearance="@style/TextAppearance.PlaylistMaker.Medium22" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -30,18 +30,9 @@
         android:layout_weight="1"
         android:layout_marginTop="@dimen/margin_l"
         android:layout_marginHorizontal="@dimen/margin_m"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:backgroundTint="@color/content_on_background_accent"
+        style="@style/Widget.PlaylistMaker.Button.Main"
         android:text="@string/main_search_button"
-        android:textColor="@color/text_on_content_accent"
-        android:textAllCaps="false"
-        android:textSize="@dimen/text_size_l"
-        app:icon="@drawable/ic_search"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/margin_xs"
-        app:iconTint="@color/ic_on_content_accent"
-        app:cornerRadius="@dimen/corner_radius_m" />
+        app:icon="@drawable/ic_search"/>
 
     <Button
         android:id="@+id/media_button"
@@ -50,18 +41,9 @@
         android:layout_weight="1"
         android:layout_marginTop="@dimen/margin_m"
         android:layout_marginHorizontal="@dimen/margin_m"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:backgroundTint="@color/content_on_background_accent"
+        style="@style/Widget.PlaylistMaker.Button.Main"
         android:text="@string/main_media_library_button"
-        android:textColor="@color/text_on_content_accent"
-        android:textAllCaps="false"
-        android:textSize="@dimen/text_size_l"
-        app:icon="@drawable/ic_media_library"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/margin_xs"
-        app:iconTint="@color/ic_on_content_accent"
-        app:cornerRadius="@dimen/corner_radius_m"/>
+        app:icon="@drawable/ic_media_library"/>
 
     <Button
         android:id="@+id/settings_button"
@@ -71,17 +53,8 @@
         android:layout_marginTop="@dimen/margin_m"
         android:layout_marginBottom="@dimen/margin_xl"
         android:layout_marginHorizontal="@dimen/margin_m"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:backgroundTint="@color/content_on_background_accent"
+        style="@style/Widget.PlaylistMaker.Button.Main"
         android:text="@string/main_settings_button"
-        android:textColor="@color/text_on_content_accent"
-        android:textAllCaps="false"
-        android:textSize="@dimen/text_size_l"
-        app:icon="@drawable/ic_settings"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/margin_xs"
-        app:iconTint="@color/ic_on_content_accent"
-        app:cornerRadius="@dimen/corner_radius_m"/>
+        app:icon="@drawable/ic_settings"/>
 
 </LinearLayout>

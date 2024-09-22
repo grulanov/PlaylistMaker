@@ -8,7 +8,4 @@
     <dimen name="margin_xl">28dp</dimen>
 
     <dimen name="corner_radius_m">16dp</dimen>
-
-    <dimen name="text_size_m">16sp</dimen>
-    <dimen name="text_size_l">22sp</dimen>
 </resources>

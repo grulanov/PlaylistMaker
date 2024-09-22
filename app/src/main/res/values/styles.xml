@@ -1,4 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
+    <style name="Widget"/>
+    <style name="Widget.PlaylistMaker"/>
 
+    <style name="Widget.PlaylistMaker.ViewGroup"/>
+    <style name="Widget.PlaylistMaker.Button"/>
+    <style name="Widget.PlaylistMaker.TextView"/>
+    <style name="Widget.PlaylistMaker.ImageView"/>
+
+    <!-- ViewGroup -->
+
+    <style name="Widget.PlaylistMaker.ViewGroup.Main"/>
+    <style name="Widget.PlaylistMaker.ViewGroup.Main.DayNight">
+        <item name="android:background">@color/yp_blue</item>
+    </style>
+
+    <!-- Button -->
+
+    <style name="Widget.PlaylistMaker.Button.Back">
+        <item name="android:src">@drawable/ic_back</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+    
+    <style name="Widget.PlaylistMaker.Button.Back.DayNight" parent="Widget.PlaylistMaker.Button.Back">
+        <item name="tint">@color/yp_black</item>
+    </style>
+    
+    <style name="Widget.PlaylistMaker.Button.Main" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:backgroundTint">@color/yp_white</item>
+        <item name="android:textColor">@color/yp_black</item>
+        <item name="android:textAppearance">@style/TextAppearance.PlaylistMaker.Medium22</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/margin_xs</item>
+        <item name="iconTint">@color/yp_black</item>
+        <item name="cornerRadius">@dimen/corner_radius_m</item>
+    </style>
+
+    <!-- TextView -->
+
+    <style name="Widget.PlaylistMaker.TextView.List">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textAppearance">@style/TextAppearance.PlaylistMaker.Regular16</item>
+    </style>
+
+    <!-- ImageView -->
+
+    <style name="Widget.PlaylistMaker.ImageView.List"/>
+    <style name="Widget.PlaylistMaker.ImageView.List.DayNight">
+        <item name="tint">@color/yp_text_gray</item>
+    </style>
 </resources>
