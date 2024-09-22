@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ViewGroup -->
+    <!-- View -->
 
-    <style name="Widget.PlaylistMaker.ViewGroup.Main.DayNight">
+    <style name="Widget.PlaylistMaker.View.Main.DayNight">
         <item name="android:background">@color/yp_black</item>
     </style>
 

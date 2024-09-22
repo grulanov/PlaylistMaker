@@ -45,6 +45,7 @@
             android:text="@string/settings_dark_theme_item"/>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/dark_theme_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -54,11 +55,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/share_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        tools:ignore="UseCompoundDrawables">
+        tools:ignore="UseCompoundDrawables"
+        style="@style/Widget.PlaylistMaker.View.SettingItem">
 
         <TextView
             android:layout_width="0dp"
@@ -79,11 +82,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/support_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        tools:ignore="UseCompoundDrawables">
+        tools:ignore="UseCompoundDrawables"
+        style="@style/Widget.PlaylistMaker.View.SettingItem">
 
         <TextView
             android:layout_width="0dp"
@@ -104,11 +109,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/user_agreement_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        tools:ignore="UseCompoundDrawables">
+        tools:ignore="UseCompoundDrawables"
+        style="@style/Widget.PlaylistMaker.View.SettingItem">
 
         <TextView
             android:layout_width="0dp"
@@ -117,7 +124,7 @@
             android:layout_marginStart="@dimen/margin_m"
             android:layout_marginVertical="21dp"
             style="@style/Widget.PlaylistMaker.TextView.List"
-            android:text="@string/settings_support_item"/>
+            android:text="@string/settings_user_agreement_item"/>
 
         <ImageView
             android:layout_width="24dp"

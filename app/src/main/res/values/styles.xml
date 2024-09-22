@@ -4,16 +4,20 @@
     <style name="Widget"/>
     <style name="Widget.PlaylistMaker"/>
 
-    <style name="Widget.PlaylistMaker.ViewGroup"/>
+    <style name="Widget.PlaylistMaker.View"/>
     <style name="Widget.PlaylistMaker.Button"/>
     <style name="Widget.PlaylistMaker.TextView"/>
     <style name="Widget.PlaylistMaker.ImageView"/>
 
-    <!-- ViewGroup -->
+    <!-- View -->
 
-    <style name="Widget.PlaylistMaker.ViewGroup.Main"/>
-    <style name="Widget.PlaylistMaker.ViewGroup.Main.DayNight">
+    <style name="Widget.PlaylistMaker.View.Main"/>
+    <style name="Widget.PlaylistMaker.View.Main.DayNight">
         <item name="android:background">@color/yp_blue</item>
+    </style>
+
+    <style name="Widget.PlaylistMaker.View.SettingItem">
+        <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
     <!-- Button -->
