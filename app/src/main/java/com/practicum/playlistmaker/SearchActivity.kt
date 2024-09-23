@@ -2,6 +2,7 @@ package com.practicum.playlistmaker
 
 import android.content.Context
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -15,6 +16,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.transition.Visibility
 
 class SearchActivity : AppCompatActivity() {
+    companion object {
+        const val SEARCH_TEXT = "SEARCH_TEXT"
+    }
+
     private val backButton: ImageButton by lazy {
         findViewById<ImageButton>(R.id.back_button)
     }
@@ -63,6 +68,18 @@ class SearchActivity : AppCompatActivity() {
         })
 
         configureClearButtonVisibility(null)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        val searchText = savedInstanceState.getString(SEARCH_TEXT, "")
+        searchEditText.setText(searchText)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(SEARCH_TEXT, searchEditText.text.toString())
     }
 
     private fun configureClearButtonVisibility(s: CharSequence?) {
