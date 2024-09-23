@@ -32,6 +32,8 @@ class SearchActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.search_edit_text)
     }
 
+    private var searchText: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -63,7 +65,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                // Do nothing
+                searchText = p0.toString()
             }
         })
 
@@ -80,7 +82,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(SEARCH_TEXT, searchEditText.text.toString())
+        outState.putString(SEARCH_TEXT, searchText)
     }
 
     private fun configureClearButtonVisibility(s: CharSequence?) {
