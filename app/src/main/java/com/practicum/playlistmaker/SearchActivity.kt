@@ -75,6 +75,7 @@ class SearchActivity : AppCompatActivity() {
 
         val searchText = savedInstanceState.getString(SEARCH_TEXT, "")
         searchEditText.setText(searchText)
+        configureClearButtonVisibility(searchText)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
