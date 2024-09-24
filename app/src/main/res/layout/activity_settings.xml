@@ -10,128 +10,42 @@
     android:background="@color/background_primary">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:title="@string/settings_title"
+        style="@style/Widget.PlaylistMaker.Toolbar"/>
 
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_marginEnd="16dp"
-            style="@style/Widget.PlaylistMaker.Button.Back.DayNight"/>
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_title"
-            android:textColor="@color/screen_title"
-            android:textAppearance="@style/TextAppearance.PlaylistMaker.Medium22" />
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <LinearLayout
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/dark_theme_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_l"
-        android:orientation="horizontal">
-        
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/margin_m"
-            android:layout_marginVertical="21dp"
-            style="@style/Widget.PlaylistMaker.TextView.List"
-            android:text="@string/settings_dark_theme_item"/>
+        android:text="@string/settings_dark_theme_item"
+        style="@style/Widget.PlaylistMaker.View.SettingsListItem"/>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/dark_theme_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_s"
-            android:layout_marginEnd="@dimen/margin_xxs"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
         android:id="@+id/share_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        tools:ignore="UseCompoundDrawables"
-        style="@style/Widget.PlaylistMaker.View.SettingItem">
+        android:text="@string/settings_share_item"
+        app:drawableEndCompat="@drawable/ic_share_24"
+        style="@style/Widget.PlaylistMaker.EditText.SettingsListItem.DayNight"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/margin_m"
-            android:layout_marginVertical="21dp"
-            style="@style/Widget.PlaylistMaker.TextView.List"
-            android:text="@string/settings_share_item"/>
-        
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginHorizontal="@dimen/margin_s"
-            style="@style/Widget.PlaylistMaker.ImageView.List.DayNight"
-            android:src="@drawable/ic_share_24"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
         android:id="@+id/support_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        tools:ignore="UseCompoundDrawables"
-        style="@style/Widget.PlaylistMaker.View.SettingItem">
+        android:text="@string/settings_support_item"
+        app:drawableEndCompat="@drawable/ic_support_24"
+        style="@style/Widget.PlaylistMaker.EditText.SettingsListItem.DayNight"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/margin_m"
-            android:layout_marginVertical="21dp"
-            style="@style/Widget.PlaylistMaker.TextView.List"
-            android:text="@string/settings_support_item"/>
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginHorizontal="@dimen/margin_s"
-            style="@style/Widget.PlaylistMaker.ImageView.List.DayNight"
-            android:src="@drawable/ic_support_24"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
         android:id="@+id/user_agreement_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        tools:ignore="UseCompoundDrawables"
-        style="@style/Widget.PlaylistMaker.View.SettingItem">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/margin_m"
-            android:layout_marginVertical="21dp"
-            style="@style/Widget.PlaylistMaker.TextView.List"
-            android:text="@string/settings_user_agreement_item"/>
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginHorizontal="@dimen/margin_s"
-            style="@style/Widget.PlaylistMaker.ImageView.List.DayNight"
-            android:src="@drawable/ic_arrow_forward_24"/>
-
-    </LinearLayout>
+        android:text="@string/settings_user_agreement_item"
+        app:drawableEndCompat="@drawable/ic_arrow_forward_24"
+        style="@style/Widget.PlaylistMaker.EditText.SettingsListItem.DayNight"/>
 
 </LinearLayout>

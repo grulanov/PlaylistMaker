@@ -10,23 +10,11 @@
     android:background="@color/background_primary">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_marginEnd="16dp"
-            style="@style/Widget.PlaylistMaker.Button.Back.DayNight"/>
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_title"
-            android:textColor="@color/screen_title"
-            android:textAppearance="@style/TextAppearance.PlaylistMaker.Medium22"/>
-
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="wrap_content"
+        app:title="@string/search_title"
+        style="@style/Widget.PlaylistMaker.Toolbar"/>
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -2,26 +2,25 @@ package com.practicum.playlistmaker
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.transition.Visibility
+import androidx.core.view.isVisible
 
 class SearchActivity : AppCompatActivity() {
     companion object {
         const val SEARCH_TEXT = "SEARCH_TEXT"
     }
 
-    private val backButton: ImageButton by lazy {
-        findViewById<ImageButton>(R.id.back_button)
+    private val toolbar: Toolbar by lazy {
+        findViewById<Toolbar>(R.id.toolbar)
     }
 
     private val clearButton: ImageButton by lazy {
@@ -44,9 +43,7 @@ class SearchActivity : AppCompatActivity() {
             insets
         }
 
-        backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+        setSupportActionBar(toolbar)
 
         clearButton.setOnClickListener {
             searchEditText.setText("")
@@ -85,7 +82,12 @@ class SearchActivity : AppCompatActivity() {
         outState.putString(SEARCH_TEXT, searchText)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
     private fun configureClearButtonVisibility(s: CharSequence?) {
-        clearButton.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+        clearButton.isVisible = !s.isNullOrEmpty()
     }
 }

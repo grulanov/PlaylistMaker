@@ -6,25 +6,20 @@
         <item name="android:background">@color/yp_black</item>
     </style>
 
-    <!-- Button -->
-
-    <style name="Widget.PlaylistMaker.Button.Back.DayNight" parent="Widget.PlaylistMaker.Button.Back">
-        <item name="tint">@color/yp_white</item>
-    </style>
-
     <!-- EditText -->
 
     <style name="Widget.PlaylistMaker.EditText.SearchBar.DayNight">
         <item name="android:textColorHint">@color/yp_black</item>
     </style>
 
-    <!-- ImageView -->
-
-    <style name="Widget.PlaylistMaker.ImageView.List.DayNight">
-        <item name="tint">@color/yp_white</item>
+    <style name="Widget.PlaylistMaker.EditText.SettingsListItem.DayNight">
+        <item name="drawableTint">@color/yp_white</item>
     </style>
+
+    <!-- ImageView -->
 
     <style name="Widget.PlaylistMaker.ImageView.SearchBar.DayNight">
         <item name="tint">@color/yp_black</item>
     </style>
+
 </resources>
