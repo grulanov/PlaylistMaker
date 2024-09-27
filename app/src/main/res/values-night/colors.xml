@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_primary">@color/yp_black</color>
+
+    <color name="screen_title">@color/yp_white</color>
+
+    <color name="text_primary">@color/yp_white</color>
+    <color name="text_secondary">@color/yp_white</color>
+
+    <color name="button_back">@color/yp_white</color>
+</resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <style name="Widget"/>
+    <style name="Widget.PlaylistMaker"/>
+
+    <style name="Widget.PlaylistMaker.View"/>
+    <style name="Widget.PlaylistMaker.Button"/>
+    <style name="Widget.PlaylistMaker.TextView"/>
+    <style name="Widget.PlaylistMaker.EditText"/>
+    <style name="Widget.PlaylistMaker.ImageView"/>
+
+    <!-- View -->
+
+    <style name="Widget.PlaylistMaker.View.Main"/>
+    <style name="Widget.PlaylistMaker.View.Main.DayNight">
+        <item name="android:background">@color/yp_blue</item>
+    </style>
+
+    <style name="Widget.PlaylistMaker.View.SettingsListItem">
+        <item name="android:minHeight">61dp</item>
+        <item name="android:paddingStart">@dimen/margin_m</item>
+        <item name="android:paddingEnd">@dimen/margin_xxs</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textAppearance">@style/TextAppearance.PlaylistMaker.Regular16</item>
+    </style>
+
+    <!-- Button -->
+
+    <style name="Widget.PlaylistMaker.Button.Main" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:backgroundTint">@color/yp_white</item>
+        <item name="android:textColor">@color/yp_black</item>
+        <item name="android:textAppearance">@style/TextAppearance.PlaylistMaker.Medium22</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/margin_xs</item>
+        <item name="iconTint">@color/yp_black</item>
+        <item name="cornerRadius">@dimen/corner_radius_m</item>
+    </style>
+
+    <!-- EditText -->
+
+    <style name="Widget.PlaylistMaker.EditText.SettingsListItem" parent="Widget.PlaylistMaker.View.SettingsListItem">
+        <item name="android:paddingEnd">@dimen/margin_s</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="drawableTint">@color/yp_text_gray</item>
+    </style>
+    <style name="Widget.PlaylistMaker.EditText.SettingsListItem.DayNight"/>
+
+    <style name="Widget.PlaylistMaker.EditText.SearchBar">
+        <item name="android:importantForAutofill">no</item>
+        <item name="android:inputType">text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:textAppearance">@style/TextAppearance.PlaylistMaker.Regular16</item>
+        <item name="android:textColor">@color/yp_black</item>
+        <item name="android:textColorHint">@color/yp_text_gray</item>
+    </style>
+    <style name="Widget.PlaylistMaker.EditText.SearchBar.DayNight"/>
+
+    <!-- ImageView -->
+
+    <style name="Widget.PlaylistMaker.ImageView.SearchBar">
+        <item name="tint">@color/yp_text_gray</item>
+    </style>
+    <style name="Widget.PlaylistMaker.ImageView.SearchBar.DayNight"/>
+
+    <!-- Toolbar -->
+
+    <style name="Widget.PlaylistMaker.Toolbar">
+        <item name="titleTextColor">@color/screen_title</item>
+        <item name="titleTextAppearance">@style/TextAppearance.PlaylistMaker.Medium22</item>
+        <item name="navigationIcon">@drawable/ic_back</item>
+    </style>
+
+</resources>
