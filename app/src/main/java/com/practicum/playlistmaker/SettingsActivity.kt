@@ -3,57 +3,44 @@ package com.practicum.playlistmaker
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
 
 
 class SettingsActivity : AppCompatActivity() {
-    private val toolbar: Toolbar by lazy {
-        findViewById<Toolbar>(R.id.toolbar)
-    }
-
-    private val darkThemeSwitch: SwitchCompat by lazy {
-        findViewById<SwitchCompat>(R.id.dark_theme_switch)
-    }
-
-    private val shareListItem: TextView by lazy {
-        findViewById<TextView>(R.id.share_list_item)
-    }
-
-    private val supportListItem: TextView by lazy {
-        findViewById<TextView>(R.id.support_list_item)
-    }
-
-    private val userAgreementListItem: TextView by lazy {
-        findViewById<TextView>(R.id.user_agreement_list_item)
-    }
+    private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_settings)
+
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
 
-        shareListItem.setOnClickListener {
+        binding.shareListItem.setOnClickListener {
             shareApp()
         }
 
-        supportListItem.setOnClickListener {
+        binding.supportListItem.setOnClickListener {
             sendMessageToSupport()
         }
 
-        userAgreementListItem.setOnClickListener {
+        binding.userAgreementListItem.setOnClickListener {
             openUserAgreement()
         }
     }

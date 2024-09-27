@@ -6,4 +6,6 @@
 
     <color name="text_primary">@color/yp_black</color>
     <color name="text_secondary">@color/yp_text_gray</color>
+
+    <color name="button_back">@color/yp_black</color>
 </resources>
