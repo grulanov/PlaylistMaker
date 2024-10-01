@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginStart="1dp">
+            android:layout_marginTop="1dp">
 
             <TextView
                 android:id="@+id/artist_name_text_view"
@@ -75,6 +75,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginEnd="@dimen/margin_s"
-        android:src="@drawable/ic_arrow_forward_24"/>
+        android:src="@drawable/ic_arrow_forward_24"
+        app:tint="@color/text_secondary"/>
 
 </LinearLayout>
