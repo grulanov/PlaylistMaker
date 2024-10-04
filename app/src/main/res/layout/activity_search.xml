@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity"
+    tools:context=".Presentation.Search.SearchActivity"
     android:orientation="vertical"
     android:background="@color/background_primary">
 
@@ -50,5 +50,11 @@
             style="@style/Widget.PlaylistMaker.ImageView.SearchBar.DayNight"/>
 
     </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </LinearLayout>

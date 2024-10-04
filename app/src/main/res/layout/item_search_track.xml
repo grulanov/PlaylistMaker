@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/margin_xs"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="@color/background_primary">
+    
+    <ImageView
+        android:id="@+id/artwork_image_view"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="@dimen/margin_s"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/placeholder_search_artwork"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/margin_xs">
+        
+        <TextView
+            android:id="@+id/track_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.PlaylistMaker.Regular16"
+            android:textColor="@color/text_primary"
+            tools:text="trackName trackName trackName trackName trackName trackName"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="1dp">
+
+            <TextView
+                android:id="@+id/artist_name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.PlaylistMaker.Regular11"
+                android:textColor="@color/text_secondary"
+                tools:text="artistName artistName artistName artistName artistName artistName"/>
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@drawable/ic_dot_13"
+                app:tint="@color/text_secondary"/>
+
+            <TextView
+                android:id="@+id/track_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.PlaylistMaker.Regular11"
+                android:textColor="@color/text_secondary"
+                tools:text="00:00"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="@dimen/margin_s"
+        android:src="@drawable/ic_arrow_forward_24"
+        app:tint="@color/text_secondary"/>
+
+</LinearLayout>
