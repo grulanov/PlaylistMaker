@@ -19,5 +19,7 @@ class SearchTrackViewHolder(private val binding: ItemSearchTrackBinding): Recycl
             .placeholder(R.drawable.placeholder_search_artwork)
             .transform(RoundedCorners(2))
             .into(binding.artworkImageView)
+
+        binding.artistNameTextView.requestLayout()
     }
 }
