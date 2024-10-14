@@ -38,6 +38,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="36dp"
             android:hint="@string/search_hint"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             style="@style/Widget.PlaylistMaker.EditText.SearchBar.DayNight"/>
 
         <ImageButton

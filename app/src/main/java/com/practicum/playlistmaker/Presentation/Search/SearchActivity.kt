@@ -4,24 +4,21 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.practicum.playlistmaker.Logic.Models.Track
+import com.practicum.playlistmaker.Logic.Repositories.TracksRepository
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 
 class SearchActivity : AppCompatActivity() {
-    companion object {
-        const val SEARCH_TEXT = "SEARCH_TEXT"
-    }
-
     private lateinit var binding: ActivitySearchBinding
-
-    private var searchText: String = ""
+    private val searchTracksAdapter = SearchTracksAdapter()
+    private val tracksRepository = TracksRepository.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +39,7 @@ class SearchActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
-        binding.recyclerView.adapter = SearchTracksAdapter(Track.mockData)
+        binding.recyclerView.adapter = searchTracksAdapter
 
         binding.clearButton.setOnClickListener {
             binding.searchEditText.setText("")
@@ -61,24 +58,19 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                searchText = p0.toString()
+                // Do nothing
             }
         })
 
+        binding.searchEditText.setOnEditorActionListener { textView, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchTracks(textView.text.toString())
+                true
+            }
+            false
+        }
+
         configureClearButtonVisibility(null)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        val searchText = savedInstanceState.getString(SEARCH_TEXT, "")
-        binding.searchEditText.setText(searchText)
-        configureClearButtonVisibility(searchText)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(SEARCH_TEXT, searchText)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -88,5 +80,15 @@ class SearchActivity : AppCompatActivity() {
 
     private fun configureClearButtonVisibility(s: CharSequence?) {
         binding.clearButton.isVisible = !s.isNullOrEmpty()
+    }
+
+    private fun searchTracks(query: String) {
+        tracksRepository.searchTracks(query) {
+            it.fold(onSuccess = { tracks ->
+                searchTracksAdapter.tracks = tracks
+            }, onFailure = {
+
+            })
+        }
     }
 }
