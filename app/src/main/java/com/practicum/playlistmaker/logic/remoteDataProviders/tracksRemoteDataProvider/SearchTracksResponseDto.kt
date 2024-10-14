@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.Logic.RemoteDataProviders.TracksRemoteDataProvider
+package com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider
 
 data class SearchTracksResponseDto(
     val results: List<SearchTrackDto>

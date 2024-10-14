@@ -1,9 +1,9 @@
-package com.practicum.playlistmaker.Presentation.Search
+package com.practicum.playlistmaker.presentation.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.practicum.playlistmaker.Logic.DomainModels.Track
+import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.databinding.ItemSearchTrackBinding
 
 class SearchTracksAdapter(): RecyclerView.Adapter<SearchTrackViewHolder>() {

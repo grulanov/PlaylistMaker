@@ -1,12 +1,12 @@
-package com.practicum.playlistmaker.Logic.Repositories
+package com.practicum.playlistmaker.logic.repositories
 
-import com.practicum.playlistmaker.Logic.Common.RepositoryException
-import com.practicum.playlistmaker.Logic.Common.RepositoryRequestCallback
-import com.practicum.playlistmaker.Logic.DomainModels.Track
-import com.practicum.playlistmaker.Logic.RemoteDataProviders.TracksRemoteDataProvider.SearchTracksResponseDto
-import com.practicum.playlistmaker.Logic.RemoteDataProviders.TracksRemoteDataProvider.TracksDtoMapper
-import com.practicum.playlistmaker.Logic.RemoteDataProviders.TracksRemoteDataProvider.TracksDtoMapperImpl
-import com.practicum.playlistmaker.Logic.RemoteDataProviders.TracksRemoteDataProvider.TracksRemoteDataProvider
+import com.practicum.playlistmaker.logic.common.RepositoryException
+import com.practicum.playlistmaker.logic.common.RepositoryRequestCallback
+import com.practicum.playlistmaker.logic.domainModels.Track
+import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.SearchTracksResponseDto
+import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.TracksDtoMapper
+import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.TracksDtoMapperImpl
+import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.TracksRemoteDataProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

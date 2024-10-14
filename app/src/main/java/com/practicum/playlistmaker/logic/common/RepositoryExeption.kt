@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.Logic.Common
+package com.practicum.playlistmaker.logic.common
 
 sealed class RepositoryException(message: String) : Exception(message) {
     class NetworkError(t: Throwable) : RepositoryException(t.message ?: "Unknown network error")

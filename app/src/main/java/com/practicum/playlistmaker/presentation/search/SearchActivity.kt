@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.Presentation.Search
+package com.practicum.playlistmaker.presentation.search
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.practicum.playlistmaker.Logic.Repositories.TracksRepository
+import com.practicum.playlistmaker.logic.repositories.TracksRepository
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 
@@ -43,6 +43,7 @@ class SearchActivity : AppCompatActivity() {
 
         binding.clearButton.setOnClickListener {
             binding.searchEditText.setText("")
+            searchTracksAdapter.tracks = emptyList()
 
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
@@ -65,7 +66,7 @@ class SearchActivity : AppCompatActivity() {
         binding.searchEditText.setOnEditorActionListener { textView, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 searchTracks(textView.text.toString())
-                true
+                return@setOnEditorActionListener true
             }
             false
         }

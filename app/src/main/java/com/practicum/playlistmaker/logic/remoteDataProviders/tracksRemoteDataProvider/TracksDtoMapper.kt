@@ -1,6 +1,6 @@
-package com.practicum.playlistmaker.Logic.RemoteDataProviders.TracksRemoteDataProvider
+package com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider
 
-import com.practicum.playlistmaker.Logic.DomainModels.Track
+import com.practicum.playlistmaker.logic.domainModels.Track
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale

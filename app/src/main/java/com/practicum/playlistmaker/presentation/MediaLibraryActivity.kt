@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.Presentation
+package com.practicum.playlistmaker.presentation
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

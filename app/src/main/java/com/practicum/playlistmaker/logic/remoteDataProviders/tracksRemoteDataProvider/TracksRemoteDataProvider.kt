@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.Logic.RemoteDataProviders.TracksRemoteDataProvider
+package com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider
 
 import retrofit2.Call
 import retrofit2.http.GET
