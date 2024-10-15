@@ -1,27 +1,25 @@
-package com.practicum.playlistmaker.Presentation.Search
+package com.practicum.playlistmaker.presentation.search
 
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.practicum.playlistmaker.Logic.Models.Track
+import com.practicum.playlistmaker.logic.repositories.TracksRepository
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
+import com.practicum.playlistmaker.presentation.common.ErrorView
 
 class SearchActivity : AppCompatActivity() {
-    companion object {
-        const val SEARCH_TEXT = "SEARCH_TEXT"
-    }
-
     private lateinit var binding: ActivitySearchBinding
-
-    private var searchText: String = ""
+    private val searchTracksAdapter = SearchTracksAdapter()
+    private val tracksRepository = TracksRepository.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +40,11 @@ class SearchActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
-        binding.recyclerView.adapter = SearchTracksAdapter(Track.mockData)
+        binding.recyclerView.adapter = searchTracksAdapter
 
         binding.clearButton.setOnClickListener {
             binding.searchEditText.setText("")
+            searchTracksAdapter.tracks = emptyList()
 
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             inputMethodManager?.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
@@ -61,24 +60,23 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                searchText = p0.toString()
+                // Do nothing
             }
         })
 
+        binding.searchEditText.setOnEditorActionListener { textView, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchTracks(textView.text.toString())
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+
+        binding.errorView.onActionButtonClick = {
+            searchTracks(binding.searchEditText.text.toString())
+        }
+
         configureClearButtonVisibility(null)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        val searchText = savedInstanceState.getString(SEARCH_TEXT, "")
-        binding.searchEditText.setText(searchText)
-        configureClearButtonVisibility(searchText)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(SEARCH_TEXT, searchText)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -88,5 +86,48 @@ class SearchActivity : AppCompatActivity() {
 
     private fun configureClearButtonVisibility(s: CharSequence?) {
         binding.clearButton.isVisible = !s.isNullOrEmpty()
+    }
+
+    private fun searchTracks(query: String) {
+        tracksRepository.searchTracks(query) {
+            it.fold(onSuccess = { tracks ->
+                searchTracksAdapter.tracks = tracks
+                showEmptyViewIfNeeded()
+            }, onFailure = {
+                showConnectionError()
+            })
+        }
+    }
+
+    private fun showEmptyViewIfNeeded() {
+        if (searchTracksAdapter.tracks.isEmpty()) {
+            showErrorView(
+                ErrorView.ViewModel(
+                    ErrorView.ViewModel.State.EMPTY,
+                    R.string.error_empty_list_title
+                )
+            )
+        } else {
+            showErrorView(null)
+        }
+    }
+
+    private fun showConnectionError() {
+        showErrorView(
+            ErrorView.ViewModel(
+                ErrorView.ViewModel.State.CONNECTION_ERROR,
+                R.string.error_connection_title,
+                R.string.error_connection_description,
+                R.string.error_connection_retry_action
+            )
+        )
+    }
+
+    private fun showErrorView(viewModel: ErrorView.ViewModel?) {
+        viewModel?.let {
+            binding.errorView.configure(it)
+        }
+        binding.errorView.isVisible = viewModel != null
+        binding.recyclerView.isVisible = viewModel == null
     }
 }

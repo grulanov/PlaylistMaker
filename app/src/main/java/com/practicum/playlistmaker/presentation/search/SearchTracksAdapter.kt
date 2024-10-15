@@ -1,12 +1,19 @@
-package com.practicum.playlistmaker.Presentation.Search
+package com.practicum.playlistmaker.presentation.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.practicum.playlistmaker.Logic.Models.Track
+import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.databinding.ItemSearchTrackBinding
 
-class SearchTracksAdapter(private val tracks: List<Track>): RecyclerView.Adapter<SearchTrackViewHolder>() {
+class SearchTracksAdapter(): RecyclerView.Adapter<SearchTrackViewHolder>() {
+
+    var tracks: List<Track> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchTrackViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemSearchTrackBinding.inflate(layoutInflater, parent, false)
