@@ -6,6 +6,13 @@
         <item name="android:background">@color/yp_black</item>
     </style>
 
+    <!-- Button -->
+
+    <style name="Widget.PlaylistMaker.Button.Plain.DayNight">
+        <item name="android:backgroundTint">@color/yp_white</item>
+        <item name="android:textColor">@color/yp_black</item>
+    </style>
+
     <!-- EditText -->
 
     <style name="Widget.PlaylistMaker.EditText.SearchBar.DayNight">

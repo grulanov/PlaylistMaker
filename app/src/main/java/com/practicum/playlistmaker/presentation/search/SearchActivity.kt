@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import com.practicum.playlistmaker.logic.repositories.TracksRepository
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
+import com.practicum.playlistmaker.presentation.common.ErrorView
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
@@ -71,6 +72,10 @@ class SearchActivity : AppCompatActivity() {
             false
         }
 
+        binding.errorView.onActionButtonClick = {
+            searchTracks(binding.searchEditText.text.toString())
+        }
+
         configureClearButtonVisibility(null)
     }
 
@@ -87,9 +92,42 @@ class SearchActivity : AppCompatActivity() {
         tracksRepository.searchTracks(query) {
             it.fold(onSuccess = { tracks ->
                 searchTracksAdapter.tracks = tracks
+                showEmptyViewIfNeeded()
             }, onFailure = {
-
+                showConnectionError()
             })
         }
+    }
+
+    private fun showEmptyViewIfNeeded() {
+        if (searchTracksAdapter.tracks.isEmpty()) {
+            showErrorView(
+                ErrorView.ViewModel(
+                    ErrorView.ViewModel.State.EMPTY,
+                    R.string.error_empty_list_title
+                )
+            )
+        } else {
+            showErrorView(null)
+        }
+    }
+
+    private fun showConnectionError() {
+        showErrorView(
+            ErrorView.ViewModel(
+                ErrorView.ViewModel.State.CONNECTION_ERROR,
+                R.string.error_connection_title,
+                R.string.error_connection_description,
+                R.string.error_connection_retry_action
+            )
+        )
+    }
+
+    private fun showErrorView(viewModel: ErrorView.ViewModel?) {
+        viewModel?.let {
+            binding.errorView.configure(it)
+        }
+        binding.errorView.isVisible = viewModel != null
+        binding.recyclerView.isVisible = viewModel == null
     }
 }

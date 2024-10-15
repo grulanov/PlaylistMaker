@@ -20,4 +20,10 @@
     <string name="settings_support_request_email">grigory.ulanov@yandex.ru</string>
     <string name="settings_support_request_title">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
     <string name="settings_support_request_message">Спасибо разработчикам и разработчицам за крутое приложение!</string>
+
+    <string name="error_empty_list_title">Ничего не нашлось</string>
+
+    <string name="error_connection_title">Проблемы со связью</string>
+    <string name="error_connection_description">Загрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="error_connection_retry_action">Обновить</string>
 </resources>
