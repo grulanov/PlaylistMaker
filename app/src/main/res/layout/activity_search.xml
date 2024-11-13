@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Presentation.Search.SearchActivity"
+    tools:context=".presentation.search.SearchActivity"
     android:orientation="vertical"
     android:background="@color/background_primary">
 
@@ -38,6 +38,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="36dp"
             android:hint="@string/search_hint"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             style="@style/Widget.PlaylistMaker.EditText.SearchBar.DayNight"/>
 
         <ImageButton
@@ -56,5 +58,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <com.practicum.playlistmaker.presentation.common.ErrorView
+        android:id="@+id/error_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </LinearLayout>
