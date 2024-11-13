@@ -4,9 +4,8 @@ import com.practicum.playlistmaker.logic.common.RepositoryException
 import com.practicum.playlistmaker.logic.common.RepositoryRequestCallback
 import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.SearchTracksResponseDto
-import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.TracksDtoMapper
-import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.TracksDtoMapperImpl
 import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.TracksRemoteDataProvider
+import com.practicum.playlistmaker.logic.remoteDataProviders.tracksRemoteDataProvider.mapToTracksList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,14 +21,13 @@ interface TracksRepository {
                 .baseUrl("https://itunes.apple.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            return TracksRepositoryImpl(retrofit.create(TracksRemoteDataProvider::class.java), TracksDtoMapperImpl())
+            return TracksRepositoryImpl(retrofit.create(TracksRemoteDataProvider::class.java))
         }
     }
 }
 
 class TracksRepositoryImpl(
-    private val remoteDataProvider: TracksRemoteDataProvider,
-    private val tracksDtoMapper: TracksDtoMapper
+    private val remoteDataProvider: TracksRemoteDataProvider
 ): TracksRepository {
     override fun searchTracks(query: String, callback: RepositoryRequestCallback<List<Track>>) {
         remoteDataProvider.searchTracks(query)
@@ -40,7 +38,7 @@ class TracksRepositoryImpl(
                 ) {
                     val resultModel = response.body()
                     if (response.isSuccessful && resultModel != null) {
-                        val tracks = tracksDtoMapper.map(resultModel)
+                        val tracks = resultModel.mapToTracksList()
                         callback.onResult(Result.success(tracks))
                     } else {
                         callback.onResult(Result.failure(RepositoryException.RequestError(response.code(), response.errorBody().toString())))
