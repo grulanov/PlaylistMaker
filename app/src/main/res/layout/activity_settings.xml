@@ -16,7 +16,7 @@
         app:title="@string/settings_title"
         style="@style/Widget.PlaylistMaker.Toolbar"/>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/dark_theme_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
