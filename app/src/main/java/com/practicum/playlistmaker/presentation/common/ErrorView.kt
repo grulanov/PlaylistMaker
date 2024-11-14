@@ -20,7 +20,8 @@ class ErrorView @JvmOverloads constructor(
         val state: State,
         @StringRes val title: Int,
         @StringRes val description: Int? = null,
-        @StringRes val actionTitle: Int? = null
+        @StringRes val actionTitle: Int? = null,
+        val onAction: (() -> Unit)? = null
     ) {
         enum class State(@DrawableRes val image: Int) {
             EMPTY(R.drawable.ic_empty_list),
@@ -28,9 +29,9 @@ class ErrorView @JvmOverloads constructor(
         }
     }
 
-    var onActionButtonClick: (() -> Unit)? = null
-
     private var binding: ErrorViewBinding = ErrorViewBinding.inflate(LayoutInflater.from(context), this, true)
+
+    private var onActionButtonClick: (() -> Unit)? = null
 
     init {
         binding.actionButton.setOnClickListener {
@@ -52,6 +53,8 @@ class ErrorView @JvmOverloads constructor(
             binding.actionButton.text = context.getText(viewModel.actionTitle)
         }
         binding.actionButton.isVisible = viewModel.actionTitle != null
+
+        onActionButtonClick = viewModel.onAction
     }
 
 }

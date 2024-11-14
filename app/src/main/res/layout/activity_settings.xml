@@ -20,7 +20,7 @@
         android:id="@+id/dark_theme_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_xl"
         android:text="@string/settings_dark_theme_item"
         style="@style/Widget.PlaylistMaker.View.SettingsListItem"/>
 

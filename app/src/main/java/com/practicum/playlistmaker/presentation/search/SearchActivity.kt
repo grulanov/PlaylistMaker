@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import com.practicum.playlistmaker.logic.repositories.TracksRepository
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
+import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.presentation.common.ErrorView
 
 class SearchActivity : AppCompatActivity() {
@@ -44,10 +45,8 @@ class SearchActivity : AppCompatActivity() {
 
         binding.clearButton.setOnClickListener {
             binding.searchEditText.setText("")
-            searchTracksAdapter.tracks = emptyList()
-
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            inputMethodManager?.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
+            showContentState(emptyList())
+            hideKeyboard()
         }
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
@@ -57,23 +56,29 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 configureClearButtonVisibility(p0)
+                if (binding.searchEditText.hasFocus() && p0?.isEmpty() == true) {
+                    showHistoryState()
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {
                 // Do nothing
             }
         })
-
         binding.searchEditText.setOnEditorActionListener { textView, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                searchTracks(textView.text.toString())
+                if (textView.text.toString().isNotEmpty()) {
+                    searchTracks(textView.text.toString())
+                }
+                hideKeyboard()
                 return@setOnEditorActionListener true
             }
             false
         }
-
-        binding.errorView.onActionButtonClick = {
-            searchTracks(binding.searchEditText.text.toString())
+        binding.searchEditText.setOnFocusChangeListener { view, hasFocus ->
+            if (binding.searchEditText.text.isEmpty()) {
+                if (hasFocus) showHistoryState() else showContentState(emptyList())
+            }
         }
 
         configureClearButtonVisibility(null)
@@ -91,35 +96,67 @@ class SearchActivity : AppCompatActivity() {
     private fun searchTracks(query: String) {
         tracksRepository.searchTracks(query) {
             it.fold(onSuccess = { tracks ->
-                searchTracksAdapter.tracks = tracks
-                showEmptyViewIfNeeded()
+                if (tracks.isEmpty()) {
+                    showNothingFoundState()
+                } else {
+                    showContentState(tracks)
+                }
             }, onFailure = {
-                showConnectionError()
+                showConnectionErrorState()
             })
         }
     }
 
-    private fun showEmptyViewIfNeeded() {
-        if (searchTracksAdapter.tracks.isEmpty()) {
-            showErrorView(
-                ErrorView.ViewModel(
-                    ErrorView.ViewModel.State.EMPTY,
-                    R.string.error_empty_list_title
-                )
-            )
-        } else {
-            showErrorView(null)
+    private fun showContentState(tracks: List<Track>) {
+        searchTracksAdapter.items = tracks.map {
+            SearchListItem.TrackItem(it) {
+                handleTrackClick(it)
+            }
         }
+        showErrorView(null)
     }
 
-    private fun showConnectionError() {
+    private fun showHistoryState() {
+        val historyTracks: List<Track> = emptyList() // TODO: - заполнить треками из истории
+
+        val items: MutableList<SearchListItem> = mutableListOf(
+            SearchListItem.SpacingItem(resources.getDimensionPixelSize(R.dimen.margin_xl)),
+            SearchListItem.HeaderItem(getString(R.string.search_search_history_title))
+        )
+        items.addAll(
+            historyTracks.map {
+                SearchListItem.TrackItem(it) {
+                    handleTrackClick(it)
+                }
+            }
+        )
+        items.add(SearchListItem.ActionButtonItem(getString(R.string.search_search_history_clear_action)) {
+            // TODO: - очистить историю
+        })
+
+        searchTracksAdapter.items = if (historyTracks.isNotEmpty()) items else emptyList()
+        showErrorView(null)
+    }
+
+    private fun showNothingFoundState() {
+        showErrorView(
+            ErrorView.ViewModel(
+                ErrorView.ViewModel.State.EMPTY,
+                R.string.error_empty_list_title
+            )
+        )
+    }
+
+    private fun showConnectionErrorState() {
         showErrorView(
             ErrorView.ViewModel(
                 ErrorView.ViewModel.State.CONNECTION_ERROR,
                 R.string.error_connection_title,
                 R.string.error_connection_description,
                 R.string.error_connection_retry_action
-            )
+            ) {
+                searchTracks(binding.searchEditText.text.toString())
+            }
         )
     }
 
@@ -129,5 +166,15 @@ class SearchActivity : AppCompatActivity() {
         }
         binding.errorView.isVisible = viewModel != null
         binding.recyclerView.isVisible = viewModel == null
+    }
+
+    private fun handleTrackClick(track: Track) {
+        // TODO: - Добавить трек в историю
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        inputMethodManager?.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
+        binding.searchEditText.clearFocus()
     }
 }
