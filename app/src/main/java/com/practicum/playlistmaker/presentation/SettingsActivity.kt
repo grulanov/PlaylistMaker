@@ -7,13 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
+import com.practicum.playlistmaker.logic.servicies.AppThemeServiceImpl
 
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
+    private val appThemeService = AppThemeServiceImpl.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +35,9 @@ class SettingsActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
-        binding.darkThemeSwitch.isChecked = (applicationContext as App).isDarkTheme
+        binding.darkThemeSwitch.isChecked = appThemeService.isDarkTheme
         binding.darkThemeSwitch.setOnCheckedChangeListener { _, checked ->
-            (applicationContext as App).switchTheme(checked)
+            appThemeService.isDarkTheme = checked
         }
 
         binding.shareListItem.setOnClickListener {
