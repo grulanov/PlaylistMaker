@@ -1,24 +1,47 @@
 package com.practicum.playlistmaker.logic.repositories
 
+import androidx.appcompat.app.AppCompatDelegate
 import com.practicum.playlistmaker.logic.localDataProviders.AppThemeLocalDataProvider
-import com.practicum.playlistmaker.logic.localDataProviders.AppThemeLocalDataProviderImpl
 
 interface AppThemeRepository {
-    var isDarkTheme: Boolean?
+    var isDarkTheme: Boolean
+
+    companion object {
+        fun create(): AppThemeRepository {
+            return AppThemeRepositoryImpl(AppThemeLocalDataProvider.create())
+        }
+
+        fun setup() {
+            create()
+        }
+    }
 }
 
 class AppThemeRepositoryImpl(
     private val localDataProvider: AppThemeLocalDataProvider
 ): AppThemeRepository {
-    companion object {
-        fun create(): AppThemeRepository {
-            return AppThemeRepositoryImpl(AppThemeLocalDataProviderImpl.create())
+    override var isDarkTheme: Boolean
+        get() = localDataProvider.isDarkTheme ?: isAppCurrentThemeDark
+        set(value) {
+            switchTheme(value)
         }
+
+    private val isAppCurrentThemeDark: Boolean
+        get() = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+
+    init {
+        switchTheme(isDarkTheme)
     }
 
-    override var isDarkTheme: Boolean?
-        get() = localDataProvider.isDarkTheme
-        set(value) {
-            localDataProvider.isDarkTheme = value
-        }
+    private fun switchTheme(isDarkThemeEnabled: Boolean) {
+        localDataProvider.isDarkTheme = isDarkThemeEnabled
+
+        AppCompatDelegate.setDefaultNightMode(
+            if (isDarkThemeEnabled) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+        )
+    }
 }

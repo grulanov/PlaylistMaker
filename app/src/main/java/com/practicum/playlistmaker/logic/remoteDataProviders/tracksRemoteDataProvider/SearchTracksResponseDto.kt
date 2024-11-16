@@ -8,6 +8,7 @@ data class SearchTracksResponseDto(
     val results: List<SearchTrackDto>
 ) {
     data class SearchTrackDto(
+        val trackId: Int,
         val trackName: String?,
         val artistName: String?,
         val trackTimeMillis: Long?,
@@ -20,6 +21,7 @@ fun SearchTracksResponseDto.mapToTracksList(): List<Track> {
 
     return this.results.map {
         Track(
+            it.trackId,
             it.trackName,
             it.artistName,
             dateFormat.format(it.trackTimeMillis),

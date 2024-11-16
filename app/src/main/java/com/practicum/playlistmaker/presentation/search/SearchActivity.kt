@@ -15,12 +15,14 @@ import com.practicum.playlistmaker.logic.repositories.TracksRepository
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import com.practicum.playlistmaker.logic.domainModels.Track
+import com.practicum.playlistmaker.logic.repositories.SearchHistoryRepository
 import com.practicum.playlistmaker.presentation.common.ErrorView
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private val searchTracksAdapter = SearchTracksAdapter()
     private val tracksRepository = TracksRepository.create()
+    private val searchHistoryRepository = SearchHistoryRepository.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +119,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showHistoryState() {
-        val historyTracks: List<Track> = emptyList() // TODO: - заполнить треками из истории
+        val historyTracks: List<Track> = searchHistoryRepository.tracksSearchHistory
 
         val items: MutableList<SearchListItem> = mutableListOf(
             SearchListItem.SpacingItem(resources.getDimensionPixelSize(R.dimen.margin_xl)),
@@ -127,11 +129,13 @@ class SearchActivity : AppCompatActivity() {
             historyTracks.map {
                 SearchListItem.TrackItem(it) {
                     handleTrackClick(it)
+                    showHistoryState()
                 }
             }
         )
         items.add(SearchListItem.ActionButtonItem(getString(R.string.search_search_history_clear_action)) {
-            // TODO: - очистить историю
+            searchHistoryRepository.clearHistory()
+            showHistoryState()
         })
 
         searchTracksAdapter.items = if (historyTracks.isNotEmpty()) items else emptyList()
@@ -169,7 +173,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun handleTrackClick(track: Track) {
-        // TODO: - Добавить трек в историю
+        searchHistoryRepository.didSelectTrack(track)
     }
 
     private fun hideKeyboard() {

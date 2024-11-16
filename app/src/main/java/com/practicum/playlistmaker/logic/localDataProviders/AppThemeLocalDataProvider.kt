@@ -5,6 +5,12 @@ import com.practicum.playlistmaker.App
 
 interface AppThemeLocalDataProvider {
     var isDarkTheme: Boolean?
+
+    companion object {
+        fun create(): AppThemeLocalDataProvider {
+            return AppThemeLocalDataProviderImpl(App.sharedPrefs)
+        }
+    }
 }
 
 class AppThemeLocalDataProviderImpl(
@@ -12,10 +18,6 @@ class AppThemeLocalDataProviderImpl(
 ): AppThemeLocalDataProvider {
     companion object {
         const val DARK_THEME_SETTING_KEY = "dark_theme_setting_key"
-
-        fun create(): AppThemeLocalDataProvider {
-            return AppThemeLocalDataProviderImpl(App.sharedPrefs)
-        }
     }
 
     override var isDarkTheme: Boolean?
@@ -27,8 +29,7 @@ class AppThemeLocalDataProviderImpl(
             }
         }
         set(value) {
-            sharedPrefs
-                .edit()
+            sharedPrefs.edit()
                 .putBoolean(DARK_THEME_SETTING_KEY, value ?: false)
                 .apply()
         }

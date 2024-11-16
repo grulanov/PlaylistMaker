@@ -19,7 +19,7 @@ sealed class SearchListItem {
     data class SpacingItem(val height: Int) : SearchListItem()
 }
 
-class SearchTracksAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchTracksAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_TRACK = 0
