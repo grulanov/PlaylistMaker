@@ -9,10 +9,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
+import com.practicum.playlistmaker.logic.repositories.AppThemeRepository
 
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
+    private val appThemeRepository = AppThemeRepository.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,11 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
+        }
+
+        binding.darkThemeSwitch.isChecked = appThemeRepository.isDarkTheme
+        binding.darkThemeSwitch.setOnCheckedChangeListener { _, checked ->
+            appThemeRepository.isDarkTheme = checked
         }
 
         binding.shareListItem.setOnClickListener {

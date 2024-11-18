@@ -4,8 +4,9 @@
     <dimen name="margin_xs">8dp</dimen>
     <dimen name="margin_s">12dp</dimen>
     <dimen name="margin_m">16dp</dimen>
-    <dimen name="margin_l">24dp</dimen>
-    <dimen name="margin_xl">28dp</dimen>
+    <dimen name="margin_l">18dp</dimen>
+    <dimen name="margin_xl">24dp</dimen>
+    <dimen name="margin_xxl">28dp</dimen>
 
     <dimen name="corner_radius_m">16dp</dimen>
 </resources>
