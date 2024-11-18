@@ -1,6 +1,7 @@
 package com.practicum.playlistmaker.presentation.search
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +17,7 @@ import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.logic.repositories.SearchHistoryRepository
+import com.practicum.playlistmaker.presentation.PlayerActivity
 import com.practicum.playlistmaker.presentation.common.ErrorView
 
 class SearchActivity : AppCompatActivity() {
@@ -179,6 +181,10 @@ class SearchActivity : AppCompatActivity() {
 
     private fun handleTrackClick(track: Track) {
         searchHistoryRepository.didSelectTrack(track)
+
+        val intent = Intent(this@SearchActivity, PlayerActivity::class.java)
+        intent.putExtra("track", track)
+        startActivity(intent)
     }
 
     private fun hideKeyboard() {
