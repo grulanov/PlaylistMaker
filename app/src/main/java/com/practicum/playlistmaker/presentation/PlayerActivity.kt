@@ -14,6 +14,7 @@ import com.practicum.playlistmaker.databinding.ActivityPlayerBinding
 import com.practicum.playlistmaker.logic.domainModels.Track
 
 class PlayerActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityPlayerBinding
     private lateinit var track: Track
 
@@ -38,13 +39,13 @@ class PlayerActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
-        binding.trackNameTextView.text = track.trackName ?: "-"
-        binding.artistNameTextView.text = track.artistName ?: "-"
+        binding.trackNameTextView.text = track.trackName ?: NO_INFO_PLACEHOLDER
+        binding.artistNameTextView.text = track.artistName ?: NO_INFO_PLACEHOLDER
         binding.trackTimeProgressTextView.text = "0:30" // TODO
-        binding.trackTimeValueTextView.text = track.trackTime ?: "-"
-        binding.yearValueTextView.text = track.releaseYear?.toString() ?: "-"
-        binding.genreValueTextView.text = track.primaryGenreName ?: "-"
-        binding.countryValueTextView.text = track.country ?: "-"
+        binding.trackTimeValueTextView.text = track.trackTime ?: NO_INFO_PLACEHOLDER
+        binding.yearValueTextView.text = track.releaseYear?.toString() ?: NO_INFO_PLACEHOLDER
+        binding.genreValueTextView.text = track.primaryGenreName ?: NO_INFO_PLACEHOLDER
+        binding.countryValueTextView.text = track.country ?: NO_INFO_PLACEHOLDER
 
         binding.collectionValueTextView.text = track.collectionName
         binding.collectionTitleTextView.isVisible = track.collectionName != null
@@ -60,5 +61,9 @@ class PlayerActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    companion object {
+        private const val NO_INFO_PLACEHOLDER = "-"
     }
 }

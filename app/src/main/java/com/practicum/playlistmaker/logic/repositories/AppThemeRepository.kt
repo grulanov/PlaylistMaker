@@ -7,27 +7,25 @@ interface AppThemeRepository {
     var isDarkTheme: Boolean
 
     companion object {
-        fun create(): AppThemeRepository {
-            return AppThemeRepositoryImpl(AppThemeLocalDataProvider.create())
+        fun create(isAppLaunchThemeDark: Boolean? = null): AppThemeRepository {
+            return AppThemeRepositoryImpl(AppThemeLocalDataProvider.create(), isAppLaunchThemeDark)
         }
 
-        fun setup() {
-            create()
+        fun setup(isAppLaunchThemeDark: Boolean) {
+            create(isAppLaunchThemeDark)
         }
     }
 }
 
 class AppThemeRepositoryImpl(
-    private val localDataProvider: AppThemeLocalDataProvider
+    private val localDataProvider: AppThemeLocalDataProvider,
+    private val isAppLaunchThemeDark: Boolean?
 ): AppThemeRepository {
     override var isDarkTheme: Boolean
-        get() = localDataProvider.isDarkTheme ?: isAppCurrentThemeDark
+        get() = localDataProvider.isDarkTheme ?: isAppLaunchThemeDark ?: false
         set(value) {
             switchTheme(value)
         }
-
-    private val isAppCurrentThemeDark: Boolean
-        get() = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
 
     init {
         switchTheme(isDarkTheme)
