@@ -8,4 +8,6 @@
     <color name="text_secondary">@color/yp_text_gray</color>
 
     <color name="button_back">@color/yp_black</color>
+    <color name="button_player_primary">@color/yp_black</color>
+    <color name="button_player_secondary">#401A1B22</color>
 </resources>

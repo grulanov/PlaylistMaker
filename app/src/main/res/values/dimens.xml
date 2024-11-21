@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="margin_xxxs">6dp</dimen>
     <dimen name="margin_xxs">6dp</dimen>
     <dimen name="margin_xs">8dp</dimen>
     <dimen name="margin_s">12dp</dimen>
     <dimen name="margin_m">16dp</dimen>
     <dimen name="margin_l">18dp</dimen>
     <dimen name="margin_xl">24dp</dimen>
-    <dimen name="margin_xxl">28dp</dimen>
+    <dimen name="margin_xxl">26dp</dimen>
+    <dimen name="margin_xxxl">28dp</dimen>
 
+    <dimen name="corner_radius_s">8dp</dimen>
     <dimen name="corner_radius_m">16dp</dimen>
 </resources>

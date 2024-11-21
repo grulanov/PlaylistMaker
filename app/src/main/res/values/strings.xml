@@ -28,4 +28,10 @@
     <string name="error_connection_title">Проблемы со связью</string>
     <string name="error_connection_description">Загрузка не удалась. Проверьте подключение к интернету</string>
     <string name="error_connection_retry_action">Обновить</string>
+
+    <string name="player_track_time_title">Длительность</string>
+    <string name="player_collection_title">Альбом</string>
+    <string name="player_release_year_title">Год</string>
+    <string name="player_genre_title">Жанр</string>
+    <string name="player_country_title">Страна</string>
 </resources>
