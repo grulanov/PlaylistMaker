@@ -103,6 +103,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun searchTracks(query: String) {
+        showProgress()
         tracksRepository.searchTracks(query) {
             it.fold(onSuccess = { tracks ->
                 if (tracks.isEmpty()) {
@@ -177,6 +178,13 @@ class SearchActivity : AppCompatActivity() {
         }
         binding.errorView.isVisible = viewModel != null
         binding.recyclerView.isVisible = viewModel == null
+        binding.progressBarContainer.isVisible = false
+    }
+
+    private fun showProgress() {
+        binding.errorView.isVisible = false
+        binding.recyclerView.isVisible = false
+        binding.progressBarContainer.isVisible = true
     }
 
     private fun handleTrackClick(track: Track) {
