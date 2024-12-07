@@ -17,6 +17,7 @@ import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.logic.repositories.SearchHistoryRepository
+import com.practicum.playlistmaker.presentation.Helpers.ClickDebouncer
 import com.practicum.playlistmaker.presentation.PlayerActivity
 import com.practicum.playlistmaker.presentation.common.ErrorView
 
@@ -25,6 +26,7 @@ class SearchActivity : AppCompatActivity() {
     private val searchTracksAdapter = SearchTracksAdapter()
     private val tracksRepository = TracksRepository.create()
     private val searchHistoryRepository = SearchHistoryRepository.create()
+    private val clickDebouncer = ClickDebouncer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -188,11 +190,13 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun handleTrackClick(track: Track) {
-        searchHistoryRepository.didSelectTrack(track)
+        clickDebouncer.performClickActionWithDebounce {
+            searchHistoryRepository.didSelectTrack(track)
 
-        val intent = Intent(this@SearchActivity, PlayerActivity::class.java)
-        intent.putExtra("track", track)
-        startActivity(intent)
+            val intent = Intent(this@SearchActivity, PlayerActivity::class.java)
+            intent.putExtra("track", track)
+            startActivity(intent)
+        }
     }
 
     private fun hideKeyboard() {
