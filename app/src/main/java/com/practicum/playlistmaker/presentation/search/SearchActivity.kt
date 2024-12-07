@@ -17,6 +17,7 @@ import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.logic.repositories.SearchHistoryRepository
+import com.practicum.playlistmaker.presentation.Helpers.ActionDebouncer
 import com.practicum.playlistmaker.presentation.Helpers.ClickDebouncer
 import com.practicum.playlistmaker.presentation.PlayerActivity
 import com.practicum.playlistmaker.presentation.common.ErrorView
@@ -27,6 +28,11 @@ class SearchActivity : AppCompatActivity() {
     private val tracksRepository = TracksRepository.create()
     private val searchHistoryRepository = SearchHistoryRepository.create()
     private val clickDebouncer = ClickDebouncer()
+    private val searchDebouncer = ActionDebouncer({
+        if (binding.searchEditText.text.toString().isNotEmpty()) {
+            searchTracks(binding.searchEditText.text.toString())
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +76,7 @@ class SearchActivity : AppCompatActivity() {
                 if (binding.searchEditText.hasFocus() && p0?.isEmpty() == true) {
                     showHistoryState()
                 }
+                searchDebouncer.performAction()
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -78,9 +85,6 @@ class SearchActivity : AppCompatActivity() {
         })
         binding.searchEditText.setOnEditorActionListener { textView, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (textView.text.toString().isNotEmpty()) {
-                    searchTracks(textView.text.toString())
-                }
                 hideKeyboard()
                 return@setOnEditorActionListener true
             }
@@ -93,6 +97,11 @@ class SearchActivity : AppCompatActivity() {
         }
 
         configureClearButtonVisibility(null)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        searchDebouncer.cancelAction()
     }
 
     override fun onSupportNavigateUp(): Boolean {
