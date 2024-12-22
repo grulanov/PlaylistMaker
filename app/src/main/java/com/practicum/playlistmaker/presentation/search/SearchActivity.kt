@@ -203,7 +203,7 @@ class SearchActivity : AppCompatActivity() {
             searchHistoryRepository.didSelectTrack(track)
 
             val intent = Intent(this@SearchActivity, PlayerActivity::class.java)
-            intent.putExtra("track", track)
+            intent.putExtra(PlayerActivity.INTENT_TRACK_KEY, track)
             startActivity(intent)
         }
     }

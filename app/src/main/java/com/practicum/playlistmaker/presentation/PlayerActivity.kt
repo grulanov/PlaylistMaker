@@ -49,7 +49,7 @@ class PlayerActivity : AppCompatActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        track = intent.getParcelableExtra<Track>("track") ?: throw NullPointerException()
+        track = intent.getParcelableExtra<Track>(INTENT_TRACK_KEY) ?: throw NullPointerException()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -150,6 +150,8 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val INTENT_TRACK_KEY = "track"
+
         private const val NO_INFO_PLACEHOLDER = "-"
         private const val TRACK_PROGRESS_UPDATE_INTERVAL = 300L
     }
