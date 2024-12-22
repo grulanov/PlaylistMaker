@@ -11,11 +11,16 @@ class ClickDebouncer {
 
     private val handler = Handler(Looper.getMainLooper())
     private var isClickAllowed = true
+    private var clickFlagResetRunnable = Runnable { isClickAllowed = true }
+
+    fun cancel() {
+        handler.removeCallbacks(clickFlagResetRunnable)
+    }
 
     fun performClickActionWithDebounce(action: () -> Unit) {
         if (isClickAllowed) {
             isClickAllowed = false
-            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY)
+            handler.postDelayed(clickFlagResetRunnable, CLICK_DEBOUNCE_DELAY)
             action()
         }
     }

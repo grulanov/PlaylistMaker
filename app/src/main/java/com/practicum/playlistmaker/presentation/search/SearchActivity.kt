@@ -101,6 +101,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        clickDebouncer.cancel()
         searchDebouncer.cancelAction()
     }
 
