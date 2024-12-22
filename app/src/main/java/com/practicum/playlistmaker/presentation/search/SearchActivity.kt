@@ -17,6 +17,8 @@ import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import com.practicum.playlistmaker.logic.domainModels.Track
 import com.practicum.playlistmaker.logic.repositories.SearchHistoryRepository
+import com.practicum.playlistmaker.presentation.Helpers.ActionDebouncer
+import com.practicum.playlistmaker.presentation.Helpers.ClickDebouncer
 import com.practicum.playlistmaker.presentation.PlayerActivity
 import com.practicum.playlistmaker.presentation.common.ErrorView
 
@@ -25,6 +27,12 @@ class SearchActivity : AppCompatActivity() {
     private val searchTracksAdapter = SearchTracksAdapter()
     private val tracksRepository = TracksRepository.create()
     private val searchHistoryRepository = SearchHistoryRepository.create()
+    private val clickDebouncer = ClickDebouncer()
+    private val searchDebouncer = ActionDebouncer({
+        if (binding.searchEditText.text.toString().isNotEmpty()) {
+            searchTracks(binding.searchEditText.text.toString())
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +76,7 @@ class SearchActivity : AppCompatActivity() {
                 if (binding.searchEditText.hasFocus() && p0?.isEmpty() == true) {
                     showHistoryState()
                 }
+                searchDebouncer.performAction()
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -76,9 +85,6 @@ class SearchActivity : AppCompatActivity() {
         })
         binding.searchEditText.setOnEditorActionListener { textView, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (textView.text.toString().isNotEmpty()) {
-                    searchTracks(textView.text.toString())
-                }
                 hideKeyboard()
                 return@setOnEditorActionListener true
             }
@@ -93,6 +99,12 @@ class SearchActivity : AppCompatActivity() {
         configureClearButtonVisibility(null)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        clickDebouncer.cancel()
+        searchDebouncer.cancelAction()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
@@ -103,6 +115,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun searchTracks(query: String) {
+        showProgress()
         tracksRepository.searchTracks(query) {
             it.fold(onSuccess = { tracks ->
                 if (tracks.isEmpty()) {
@@ -177,14 +190,23 @@ class SearchActivity : AppCompatActivity() {
         }
         binding.errorView.isVisible = viewModel != null
         binding.recyclerView.isVisible = viewModel == null
+        binding.progressBarContainer.isVisible = false
+    }
+
+    private fun showProgress() {
+        binding.errorView.isVisible = false
+        binding.recyclerView.isVisible = false
+        binding.progressBarContainer.isVisible = true
     }
 
     private fun handleTrackClick(track: Track) {
-        searchHistoryRepository.didSelectTrack(track)
+        clickDebouncer.performClickActionWithDebounce {
+            searchHistoryRepository.didSelectTrack(track)
 
-        val intent = Intent(this@SearchActivity, PlayerActivity::class.java)
-        intent.putExtra("track", track)
-        startActivity(intent)
+            val intent = Intent(this@SearchActivity, PlayerActivity::class.java)
+            intent.putExtra(PlayerActivity.INTENT_TRACK_KEY, track)
+            startActivity(intent)
+        }
     }
 
     private fun hideKeyboard() {

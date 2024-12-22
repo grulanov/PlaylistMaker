@@ -18,7 +18,8 @@ data class SearchTracksResponseDto(
         val primaryGenreName: String?,
         val country: String?,
         val trackTimeMillis: Long?,
-        val artworkUrl100: String?
+        val artworkUrl100: String?,
+        val previewUrl: String
     )
 }
 
@@ -35,7 +36,8 @@ fun SearchTracksResponseDto.mapToTracksList(): List<Track> {
             it.primaryGenreName,
             it.country,
             timeDateFormat.format(it.trackTimeMillis),
-            it.artworkUrl100
+            it.artworkUrl100,
+            it.previewUrl
         )
     }
 }
