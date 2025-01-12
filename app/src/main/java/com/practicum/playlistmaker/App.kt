@@ -4,7 +4,7 @@ import android.app.Application
 import android.app.UiModeManager
 import android.content.Context
 import android.content.SharedPreferences
-import com.practicum.playlistmaker.logic.repositories.AppThemeRepository
+import com.practicum.playlistmaker.di.Creator
 
 private const val PLAYLIST_MAKER_PREFERENCES = "playlist_maker_preferences"
 
@@ -21,6 +21,6 @@ class App: Application() {
 
         val uiModeManager = applicationContext.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
         val isAppLaunchThemeDark = uiModeManager.nightMode == UiModeManager.MODE_NIGHT_YES
-        AppThemeRepository.setup(isAppLaunchThemeDark)
+        Creator.setupAppTheme(isAppLaunchThemeDark)
     }
 }

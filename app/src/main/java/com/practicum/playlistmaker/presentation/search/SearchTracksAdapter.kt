@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.practicum.playlistmaker.databinding.ItemSearchActionButtonBinding
 import com.practicum.playlistmaker.databinding.ItemSearchHeaderBinding
-import com.practicum.playlistmaker.logic.domainModels.Track
+import com.practicum.playlistmaker.domain.models.Track
 import com.practicum.playlistmaker.databinding.ItemSearchTrackBinding
-import com.practicum.playlistmaker.presentation.search.viewHolders.SearchActionButtonViewHolder
-import com.practicum.playlistmaker.presentation.search.viewHolders.SearchHeaderViewHolder
-import com.practicum.playlistmaker.presentation.search.viewHolders.SearchSpacingViewHolder
-import com.practicum.playlistmaker.presentation.search.viewHolders.SearchTrackViewHolder
+import com.practicum.playlistmaker.ui.search.viewHolders.SearchActionButtonViewHolder
+import com.practicum.playlistmaker.ui.search.viewHolders.SearchHeaderViewHolder
+import com.practicum.playlistmaker.ui.search.viewHolders.SearchSpacingViewHolder
+import com.practicum.playlistmaker.ui.search.viewHolders.SearchTrackViewHolder
 
 sealed class SearchListItem {
     data class TrackItem(val track: Track, val onTrackClick: () -> Unit) : SearchListItem()
