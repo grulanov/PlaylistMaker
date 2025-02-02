@@ -1,6 +1,5 @@
 package com.practicum.playlistmaker.ui.player
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,30 +13,29 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.practicum.playlistmaker.R
 import com.practicum.playlistmaker.databinding.ActivityPlayerBinding
+import com.practicum.playlistmaker.di.Creator
+import com.practicum.playlistmaker.domain.api.PlayerInteractor
+import com.practicum.playlistmaker.domain.models.PlayerState
 import com.practicum.playlistmaker.domain.models.Track
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PlayerActivity : AppCompatActivity() {
-    enum class PlayerState {
-        IDLE, PREPARED, PLAYING, PAUSED
-    }
-
     private lateinit var binding: ActivityPlayerBinding
     private lateinit var track: Track
 
-    private val mediaPlayer = MediaPlayer()
-    private var playerState = PlayerState.IDLE
+    private val playerInteractor = Creator.createPlayerInteractor()
+
     private val playerTimeProgressDateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
 
     private val handler = Handler(Looper.getMainLooper())
 
     private val trackProgressUpdateRunnable = object : Runnable {
         override fun run() {
-            if (playerState != PlayerState.PLAYING) {
+            if (playerInteractor.state != PlayerState.PLAYING) {
                 return
             }
-            updateTrackTimeProgress(mediaPlayer.currentPosition)
+            updateTrackTimeProgress(playerInteractor.currentPosition)
             handler.postDelayed(this, TRACK_PROGRESS_UPDATE_INTERVAL)
         }
     }
@@ -98,7 +96,7 @@ class PlayerActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         handler.removeCallbacks(trackProgressUpdateRunnable)
-        mediaPlayer.release()
+        playerInteractor.release()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -107,38 +105,35 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun preparePlayer() {
-        mediaPlayer.setDataSource(track.previewUrl)
-        mediaPlayer.prepareAsync()
-        mediaPlayer.setOnPreparedListener {
-            resetPlayer()
-        }
-        mediaPlayer.setOnCompletionListener {
-            resetPlayer()
-        }
+        playerInteractor.addListener(object : PlayerInteractor.PlayerInteractorListener {
+            override fun playerStateDidChange(state: PlayerState) {
+                if (state == PlayerState.PREPARED) {
+                    resetPlayer()
+                }
+            }
+        })
+        playerInteractor.setDataSource(track.previewUrl)
     }
 
     private fun resetPlayer() {
         binding.playPauseButton.isEnabled = true
         binding.playPauseButton.setImageResource(R.drawable.ic_play)
-        playerState = PlayerState.PREPARED
         updateTrackTimeProgress(0)
     }
 
     private fun startPlayer() {
-        mediaPlayer.start()
+        playerInteractor.start()
         binding.playPauseButton.setImageResource(R.drawable.ic_pause)
-        playerState = PlayerState.PLAYING
         handler.post(trackProgressUpdateRunnable)
     }
 
     private fun pausePlayer() {
-        mediaPlayer.pause()
+        playerInteractor.pause()
         binding.playPauseButton.setImageResource(R.drawable.ic_play)
-        playerState = PlayerState.PAUSED
     }
 
     private fun onPlayPauseButtonTap() {
-        when(playerState) {
+        when(playerInteractor.state) {
             PlayerState.IDLE -> {} // Do nothing
             PlayerState.PREPARED, PlayerState.PAUSED -> startPlayer()
             PlayerState.PLAYING -> pausePlayer()
