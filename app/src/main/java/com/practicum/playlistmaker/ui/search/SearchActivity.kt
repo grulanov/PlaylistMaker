@@ -3,6 +3,8 @@ package com.practicum.playlistmaker.ui.search
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
@@ -25,9 +27,12 @@ import com.practicum.playlistmaker.ui.common.ErrorView
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
+    private val handler = Handler(Looper.getMainLooper())
     private val searchTracksAdapter = SearchTracksAdapter()
+
     private val tracksInteractor = Creator.createTracksInteractor()
     private val searchHistoryInteractor = Creator.createSearchHistoryInteractor()
+
     private val clickDebouncer = ClickDebouncer()
     private val searchDebouncer = ActionDebouncer({
         if (binding.searchEditText.text.toString().isNotEmpty()) {
@@ -118,15 +123,17 @@ class SearchActivity : AppCompatActivity() {
     private fun searchTracks(query: String) {
         showProgress()
         tracksInteractor.searchTracks(query) {
-            it.fold(onSuccess = { tracks ->
-                if (tracks.isEmpty()) {
-                    showNothingFoundState()
-                } else {
-                    showContentState(tracks)
-                }
-            }, onFailure = {
-                showConnectionErrorState()
-            })
+            handler.post {
+                it.fold(onSuccess = { tracks ->
+                    if (tracks.isEmpty()) {
+                        showNothingFoundState()
+                    } else {
+                        showContentState(tracks)
+                    }
+                }, onFailure = {
+                    showConnectionErrorState()
+                })
+            }
         }
     }
 
@@ -141,27 +148,29 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showHistoryState() {
         searchHistoryInteractor.getTracksSearchHistory {
-            val historyTracks: List<Track> = it
+            handler.post {
+                val historyTracks: List<Track> = it
 
-            val items: MutableList<SearchListItem> = mutableListOf(
-                SearchListItem.SpacingItem(resources.getDimensionPixelSize(R.dimen.margin_xl)),
-                SearchListItem.HeaderItem(getString(R.string.search_search_history_title))
-            )
-            items.addAll(
-                historyTracks.map {
-                    SearchListItem.TrackItem(it) {
-                        handleTrackClick(it)
-                        showHistoryState()
+                val items: MutableList<SearchListItem> = mutableListOf(
+                    SearchListItem.SpacingItem(resources.getDimensionPixelSize(R.dimen.margin_xl)),
+                    SearchListItem.HeaderItem(getString(R.string.search_search_history_title))
+                )
+                items.addAll(
+                    historyTracks.map {
+                        SearchListItem.TrackItem(it) {
+                            handleTrackClick(it)
+                            showHistoryState()
+                        }
                     }
-                }
-            )
-            items.add(SearchListItem.ActionButtonItem(getString(R.string.search_search_history_clear_action)) {
-                searchHistoryInteractor.clearHistory()
-                showHistoryState()
-            })
+                )
+                items.add(SearchListItem.ActionButtonItem(getString(R.string.search_search_history_clear_action)) {
+                    searchHistoryInteractor.clearHistory()
+                    showHistoryState()
+                })
 
-            searchTracksAdapter.items = if (historyTracks.isNotEmpty()) items else emptyList()
-            showErrorView(null)
+                searchTracksAdapter.items = if (historyTracks.isNotEmpty()) items else emptyList()
+                showErrorView(null)
+            }
         }
     }
 

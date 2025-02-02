@@ -3,6 +3,8 @@ package com.practicum.playlistmaker.ui.settings
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,6 +16,7 @@ import com.practicum.playlistmaker.di.Creator
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
+    private val handler = Handler(Looper.getMainLooper())
     private val appThemeInteractor = Creator.createAppThemeInteractor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,9 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         appThemeInteractor.getDarkThemeState {
-            binding.darkThemeSwitch.isChecked = it
+            handler.post {
+                binding.darkThemeSwitch.isChecked = it
+            }
         }
         binding.darkThemeSwitch.setOnCheckedChangeListener { _, checked ->
             appThemeInteractor.setDarkThemeState(checked)
