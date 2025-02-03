@@ -12,7 +12,7 @@ class SearchHistoryInteractorImpl(
 
     override fun getTracksSearchHistory(callback: (List<Track>) -> Unit) {
         executor.execute {
-            callback(repository.tracksSearchHistory)
+            callback(repository.getTracksSearchHistory())
         }
     }
 

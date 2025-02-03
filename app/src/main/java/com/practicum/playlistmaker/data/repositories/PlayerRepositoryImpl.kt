@@ -13,7 +13,7 @@ class PlayerRepositoryImpl(
     override var state: PlayerState = PlayerState.IDLE
         private set(value) {
             field = value
-            listeners.forEach { it.playerStateDidChange(value) }
+            listeners.forEach { it.onPlayerStateChange(value) }
         }
 
     override val currentPosition: Int

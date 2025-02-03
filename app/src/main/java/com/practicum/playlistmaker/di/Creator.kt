@@ -1,7 +1,10 @@
 package com.practicum.playlistmaker.di
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.media.MediaPlayer
-import com.practicum.playlistmaker.App
 import com.practicum.playlistmaker.data.localDataProviders.AppThemeLocalDataProvider
 import com.practicum.playlistmaker.data.localDataProviders.AppThemeLocalDataProviderImpl
 import com.practicum.playlistmaker.data.localDataProviders.SearchHistoryLocalDataProvider
@@ -25,21 +28,30 @@ import com.practicum.playlistmaker.domain.impl.PlayerInteractorImpl
 import com.practicum.playlistmaker.domain.impl.SearchHistoryInteractorImpl
 import com.practicum.playlistmaker.domain.impl.TracksInteractorImpl
 
+@SuppressLint("StaticFieldLeak")
 object Creator {
+    private const val PLAYLIST_MAKER_PREFERENCES = "playlist_maker_preferences"
+
+    lateinit var context: Context
+
+    private fun createSharedPrefs(): SharedPreferences {
+        return context.getSharedPreferences(PLAYLIST_MAKER_PREFERENCES, MODE_PRIVATE)
+    }
+
     private fun createAppThemeLocalDataProvider(): AppThemeLocalDataProvider {
-        return AppThemeLocalDataProviderImpl(App.sharedPrefs)
+        return AppThemeLocalDataProviderImpl(createSharedPrefs())
     }
 
     private fun createSearchHistoryLocalDataProvider(): SearchHistoryLocalDataProvider {
-        return SearchHistoryLocalDataProviderImpl(App.sharedPrefs)
+        return SearchHistoryLocalDataProviderImpl(createSharedPrefs())
     }
 
     private fun createTracksRemoteDataProvider(): TracksRemoteDataProvider {
         return TracksRemoteDataProviderImpl()
     }
 
-    private fun createAppThemeRepository(isAppLaunchThemeDark: Boolean? = null): AppThemeRepository {
-        return AppThemeRepositoryImpl(createAppThemeLocalDataProvider(), isAppLaunchThemeDark)
+    private fun createAppThemeRepository(): AppThemeRepository {
+        return AppThemeRepositoryImpl(createAppThemeLocalDataProvider())
     }
 
     private fun createSearchHistoryRepository(): SearchHistoryRepository {
@@ -54,12 +66,8 @@ object Creator {
         return PlayerRepositoryImpl(MediaPlayer())
     }
 
-    fun setupAppTheme(isAppLaunchThemeDark: Boolean? = null) {
-        createAppThemeRepository(isAppLaunchThemeDark)
-    }
-
-    fun createAppThemeInteractor(): AppThemeInteractor {
-        return AppThemeInteractorImpl(createAppThemeRepository())
+    val appThemeInteractor: AppThemeInteractor by lazy {
+        AppThemeInteractorImpl(createAppThemeRepository())
     }
 
     fun createSearchHistoryInteractor(): SearchHistoryInteractor {

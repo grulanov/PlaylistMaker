@@ -17,7 +17,7 @@ import com.practicum.playlistmaker.di.Creator
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
     private val handler = Handler(Looper.getMainLooper())
-    private val appThemeInteractor = Creator.createAppThemeInteractor()
+    private val appThemeInteractor = Creator.appThemeInteractor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

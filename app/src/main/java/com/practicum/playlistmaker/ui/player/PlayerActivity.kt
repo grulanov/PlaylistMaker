@@ -106,7 +106,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun preparePlayer() {
         playerInteractor.addListener(object : PlayerInteractor.PlayerInteractorListener {
-            override fun playerStateDidChange(state: PlayerState) {
+            override fun onPlayerStateChange(state: PlayerState) {
                 if (state == PlayerState.PREPARED) {
                     resetPlayer()
                 }

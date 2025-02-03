@@ -5,28 +5,20 @@ import com.practicum.playlistmaker.data.localDataProviders.AppThemeLocalDataProv
 import com.practicum.playlistmaker.domain.api.AppThemeRepository
 
 class AppThemeRepositoryImpl(
-    private val localDataProvider: AppThemeLocalDataProvider,
-    private val isAppLaunchThemeDark: Boolean?
+    private val localDataProvider: AppThemeLocalDataProvider
 ): AppThemeRepository {
     override var isDarkTheme: Boolean
-        get() = localDataProvider.isDarkTheme ?: isAppLaunchThemeDark ?: false
+        get() = localDataProvider.isDarkTheme ?: false
         set(value) {
             switchTheme(value)
         }
 
-    init {
-        switchTheme(isDarkTheme)
+    override fun setUpInitialTheme(isAppLaunchThemeDark: Boolean) {
+        val isDarkThemeEnabled = localDataProvider.isDarkTheme ?: isAppLaunchThemeDark
+        switchTheme(isDarkThemeEnabled)
     }
 
     private fun switchTheme(isDarkThemeEnabled: Boolean) {
         localDataProvider.isDarkTheme = isDarkThemeEnabled
-
-        AppCompatDelegate.setDefaultNightMode(
-            if (isDarkThemeEnabled) {
-                AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                AppCompatDelegate.MODE_NIGHT_NO
-            }
-        )
     }
 }

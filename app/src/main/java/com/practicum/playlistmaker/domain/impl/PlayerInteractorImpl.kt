@@ -18,8 +18,8 @@ class PlayerInteractorImpl(
 
     init {
         playerRepository.addListener(object : PlayerRepository.PlayerRepositoryListener {
-            override fun playerStateDidChange(state: PlayerState) {
-                listeners.forEach { it.playerStateDidChange(state) }
+            override fun onPlayerStateChange(state: PlayerState) {
+                listeners.forEach { it.onPlayerStateChange(state) }
             }
         })
     }

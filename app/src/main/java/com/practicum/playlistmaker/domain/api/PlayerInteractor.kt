@@ -4,7 +4,7 @@ import com.practicum.playlistmaker.domain.models.PlayerState
 
 interface PlayerInteractor {
     interface PlayerInteractorListener {
-        fun playerStateDidChange(state: PlayerState)
+        fun onPlayerStateChange(state: PlayerState)
     }
 
     val state: PlayerState
